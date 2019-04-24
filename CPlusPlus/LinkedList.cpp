@@ -57,9 +57,28 @@ class linkedList
 					last = last -> next; 
 				}
 				last -> next = temp;
-				temp ->next =NULL;
+				temp ->next = NULL;
+				tail = temp;
 			}
 		}
+		
+		
+		void searchValue(int value)
+		{
+			node *temp;
+			temp = head;
+			
+			while(temp != NULL)
+			{
+				if(temp -> nodeValue == value)
+				{
+					cout << "The value " << temp -> nodeValue << " found at linkedlist " << temp << endl;
+				}
+				temp = temp -> next;
+			}
+		}
+		
+		
 		void displayList()
 		{
 			node *temp;
@@ -86,6 +105,8 @@ int main()
 	cout << endl << endl <<  "Insert at End" << endl;
 	obj.insertAtEnd(20);
 	obj.displayList();
+	cout << "\n\n" << "Searching a Value" << endl;
+	obj.searchValue(20);
 	cout<<endl;
 	return 0;
     //Insert(Beginning, End, before or after a key), Delete, Display
