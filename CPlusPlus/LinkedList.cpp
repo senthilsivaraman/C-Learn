@@ -240,16 +240,33 @@ class linkedList
 			
 		}
 		
-		
+		void deleteList()
+		{
+			while(head != NULL)
+			{
+				node *temp =new node;
+				temp = head;
+				head = head -> next;
+				delete temp;
+			}
+		}
 		void displayList()
 		{
-			node *temp;
-			temp = head;
-			while (temp != NULL)
+			if(head == NULL)
 			{
-				cout << temp -> nodeValue << "\t";
-				temp = temp -> next;
+				cout << "\n" << "Linked list is empty" << endl;
 			}
+			else
+			{
+				node *temp;
+				temp = head;
+				while (temp != NULL)
+				{
+					cout << temp -> nodeValue << "\t";
+					temp = temp -> next;
+				}
+			}
+			
 		}
 };
 
@@ -297,8 +314,12 @@ int main()
 	cout << endl << endl << "Delete at Position" << endl;
 	obj.deletePos(4);
 	obj.displayList();
-	
+	cout << endl << endl << "Delete Linked list : " << endl;
+	obj.deleteList();
+	obj.displayList();
 	
 	return 0;
+   
+   
    
 }
