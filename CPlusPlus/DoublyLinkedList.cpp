@@ -250,6 +250,74 @@ class doubleLinkedList
 		}
 		
 		
+		void deleteNodeAt(int pos)
+		{
+			int count;
+			count = getcount();
+			
+			node *temp = new node;
+			node *temp2 = new node;
+			node *temp3 = new node;
+			temp = head;
+			
+			if(head == NULL)
+			{
+				cout << endl << "List is already empty" << endl;
+			}
+			
+			else if(pos <= 0 || pos > count)
+			{
+				cout << endl << "Invalid position to delete in the list" << endl;
+			}
+			
+			else
+			{
+				if(pos == 1 && count == 1)
+				{
+					head = NULL;
+					tail = NULL;
+					delete temp;
+				}
+				
+				else if (pos == 1 && count > 1)
+				{
+					head = head -> next;
+					delete temp;
+					temp2 = head;
+					temp2 -> prev = NULL;
+				}
+				
+				else if (pos == count)
+				{
+					temp = head;
+					for(int i = 1; i <= pos-1; i++)
+					{
+						temp = temp -> next;
+					}
+					temp2 = temp -> prev;
+					temp2 -> next = NULL;
+					delete temp;
+				}
+				
+				else
+				{
+					temp = head;
+					for(int i = 1; i <= pos-1; i++)
+					{
+						temp = temp -> next;
+					}
+					temp2 = temp -> prev;
+					temp3 = temp -> next;
+					temp2 -> next = temp3;
+					temp3 -> prev = temp2;
+					delete temp;
+					
+				}
+			}
+		}
+		
+		
+		
 		void deleteFullList()
 		{
 			node *temp = new node;
@@ -318,6 +386,12 @@ int main()
 	list.displayList();
 	
 	
+	//Deleting the particular node
+	list.deleteNodeAt(1);
+	list.displayList();
+	
+	list.deleteNodeAt(2);
+	list.displayList();
 	
 	return 0;
 }
