@@ -34,7 +34,7 @@ class doubleLinkedList
 		
 		void insertAtFront(int value)
 		{
-			cout << endl << "Insert At Front Loop executed" << endl;
+			//cout << endl << "Insert At Front Loop executed" << endl;
 			node *temp = new node;
 			node *temp2 = new node;
 			temp -> nodeValue = value;
@@ -45,22 +45,24 @@ class doubleLinkedList
 				temp -> next = NULL;
 				head = temp;
 				tail = temp;
-				cout << "Successfully Inserted at the front of the list" << endl;
+				//cout << "Successfully Inserted at the front of the list" << endl;
 			}
 			
 			else
 			{
 				temp2 -> prev = temp;
+				temp2 -> next = NULL;
 				temp -> prev = NULL;
 				temp -> next = head;
 				head = temp;
+				tail = temp2;
 			}
 		}
 		
 		
 		void insertAtEnd(int value)
 		{
-			cout << endl << "Insert At End Loop executed" << endl;
+			//cout << endl << "Insert At End Loop executed" << endl;
 			node *temp = new node;
 			node *temp2 = new node;
 			temp2 = head;
@@ -73,7 +75,7 @@ class doubleLinkedList
 				temp -> next = NULL;
 				head = temp;
 				tail = temp;
-				cout << "Successfully Inserted at the front of the list" << endl;
+				//cout << "Successfully Inserted at the front of the list" << endl;
 			}	
 			else
 			{
@@ -85,7 +87,7 @@ class doubleLinkedList
 				temp2 -> next = temp;
 				temp -> next = NULL;
 				temp -> prev = temp2;
-				tail = temp2;
+				tail = temp;
 				//cout << endl << "Value" << temp2 -> nodeValue << endl;
 				
 			}
@@ -111,14 +113,14 @@ class doubleLinkedList
 		
 		void insertAt(int pos, int value)
 		{
-			cout << endl << "Insert At  Specific Loop executed" << endl;
+			//cout << endl << "Insert At  Specific Loop executed" << endl;
 			node *temp = new node;
 			node *temp2 = new node;
 			node *temp3 = new node;
 			temp -> nodeValue = value;
 			
 			int count1 = getcount();
-			cout << "\n" << "Total Nodes in List " << count1 << endl << endl;
+			//cout << "\n" << "Total Nodes in List " << count1 << endl << endl;
 			
 			//Inserting At Front
 			if(pos == 1)
@@ -129,7 +131,7 @@ class doubleLinkedList
 					temp -> next = NULL;
 					head = temp;
 					tail = temp;
-					cout << "Successfully Inserted at the front of the list" << endl;
+					//cout << "Successfully Inserted at the front of the list" << endl;
 				}
 				
 				else
@@ -181,6 +183,85 @@ class doubleLinkedList
 			}
 		}
 		
+		void deleteFirst()
+		{
+			if(head != NULL)
+			{
+				node *temp = new node;
+				temp = head;
+				if(head -> next != NULL)
+				{
+					head -> next -> prev = NULL;
+					head = head -> next;
+					delete temp;
+				}
+				else
+				{
+					//cout << "else loop exec in delete first" << endl;
+					delete temp;
+					head = NULL;
+					tail = NULL;
+				}
+				
+			}
+			
+			else
+			{
+				cout << endl << "List is Empty" << endl;
+			}
+			
+		}
+		
+		
+		void deleteLast()
+		{
+			node *temp = new node;
+			node *temp2 = new node;
+			temp = head;
+			
+			
+			if(head != NULL)
+			{
+				if(head -> next == NULL)
+				{
+					//cout << "If loop exec in delete Last" << endl;
+					delete temp;
+					head = NULL;
+					tail = NULL;
+				}
+				else
+				{
+					//cout << "Else loop exec in delete Last" << endl;
+					while(temp -> next != NULL)
+					{
+						//cout << "While loop exec";
+						temp = temp -> next;
+					}
+					temp2 = temp -> prev;
+					temp2 -> next = NULL;
+					delete temp;
+				}
+			}
+			
+			else
+			{
+				cout << endl <<"List is already empty" << endl;
+			}
+		}
+		
+		
+		void deleteFullList()
+		{
+			node *temp = new node;
+			
+			while(head != NULL)
+			{
+				temp = head;
+				head = head -> next;
+				delete temp;
+			}
+		}
+		
 		
 		void displayList()
 		{
@@ -192,6 +273,7 @@ class doubleLinkedList
 			}
 			else
 			{
+				cout<< "\n";
 				while(temp != NULL)
 				{
 					//cout << "Loop Executed";
@@ -210,15 +292,32 @@ int main()
 	doubleLinkedList list;
 	
 	cout << "Inserting at the Front of the List" << endl;
+	
+	// Insert at Front of the list
 	list.insertAtFront(10);
+	list.insertAtFront(20);
+	list.insertAtFront(30);
 	list.displayList();
-	list.insertAtFront(100);
-	list.insertAtFront(200);
-	list.insertAtFront(300);
-	list.insertAtEnd(500);
+		
+	// Insert at the End of the list
+	list.insertAtEnd(111);
+	list.insertAtEnd(1151);
 	list.displayList();
-	list.insertAt(2, 111);
+	
+	// Insert at the Particular position
+	list.insertAt(1,333);
+	list.insertAt(4,666);
 	list.displayList();
+	
+	// Deleting the First Node
+	list.deleteFirst();
+	list.displayList();
+	
+	//Deleting the Last node
+	list.deleteLast();
+	list.displayList();
+	
+	
 	
 	return 0;
 }
